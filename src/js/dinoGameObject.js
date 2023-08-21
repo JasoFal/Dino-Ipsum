@@ -33,6 +33,12 @@ export default class DinoGameObject {
       }
     }
   }
+
+  checkForUniqueLetters() {
+    this.dinoArray.forEach(char => {
+      
+    });
+  }
 }
 
 // win condition options:

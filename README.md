@@ -1,8 +1,8 @@
-# Template Repo
+# Dino Ipsum
 
 #### A template repo to make my life easier
 
-#### By Jason Falk
+#### By Jason Falk and Brian Scherner
 
 ## Technologies Used
 
@@ -28,3 +28,7 @@
 * _should go here_
 
 ## License
+
+MIT
+
+Copyright (c) _8/18/23_ _Jason Falk, Brian Scherner_

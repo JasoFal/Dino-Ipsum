@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <title>DinoIpsum</title>
+</head>
+<body>
+  <h1>DinoIpsum The Game</h1>
+  <p>Click the button below to start new game. You have 10 attempts to guess the dino name.</p>
+  <form id="createNewGame">
+    <button type="submit" id="startNewGame">Start</button>
+  </form>
+  <div id="letterDiv" class="hidden">
+    <form id="letterInput">
+      <label for="letter">Enter a letter:</label>
+      <input id="letter" type="text" name="keyword" maxlength="1">
+      <button type="submit" id="enterLetter">Guess Letter</button>
+    </form>
+  </div>
+  <p id="showResponse"></p>
+  <div id="resetButton" class="hidden">
+    <button type="reset" id="clear">Try Again</button>
+  </div>
+</body>
+</html>
