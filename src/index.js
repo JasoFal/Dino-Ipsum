@@ -28,21 +28,25 @@ window.addEventListener("load", function () {
     getDinoName().then(function (dinoName) {
       let dinoGameObject = new DinoGameObject(dinoName);
       let letterDiv = document.querySelector("#letterDiv");
+      let showResponseDomEle = document.querySelector("p#showResponse");
+      let showPreviousGuesses = document.querySelector("p#previousGuesses");
+      let errorMessageOutputDomEle = document.querySelector("p#errorMessage");
       letterDiv.removeAttribute("class", "hidden");
       document.querySelector("form#letterInput").addEventListener("submit", function (e) {
         e.preventDefault();
+        errorMessageOutputDomEle.innerText = "";
         let letter = getLetter();
         if (/[^a-zA-Z\s]/g.test(letter) || letter === "") {
-          document.querySelector("#showResponse").innerText = "Not a valid letter";
+          showResponseDomEle.innerText = "Not a valid letter";
         } else {
           dinoGameObject.letterArray = [letter];
           if (dinoGameObject.isPreviousGuess() === false) {
             dinoGameObject.checkLetterVsDino();
-            document.querySelector("p#showResponse").innerText = dinoGameObject.resultsArray;
-            document.querySelector("p#previousAttempts").innerText = dinoGameObject.previousAttempts;
+            showResponseDomEle.innerText = dinoGameObject.resultsArray;
+            showPreviousGuesses.innerText = dinoGameObject.previousAttempts;
             dinoGameObject.updateAttemptsUsed();
             if (dinoGameObject.gameLoss === true) {
-              document.querySelector("p#showResponse").innerText = "Game Over";
+              showResponseDomEle.innerText = "Game Over";
               let resetDiv = document.querySelector("div#resetButton");
               resetDiv.removeAttribute("class", "hidden");
               document.querySelector("#clear").addEventListener("click", function() {
@@ -50,7 +54,7 @@ window.addEventListener("load", function () {
               });
             }
           } else {
-            document.querySelector("p#previousAttempts").innerText = "You have already guessed that letter, enter new guess.";
+            errorMessageOutputDomEle.innerText = "You have already guessed that letter, enter new guess.";
           }
         }
         document.querySelector("input#letter").value = "";
