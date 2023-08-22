@@ -7,11 +7,11 @@ export default class DinoGameObject {
     this.wordTrue = false;
     this.gameLoss = false;
     this.gameWin = false;
-    this.attemptedWords = [];
+    this.previousAttempts = [];
+    this.letterTrue = null;
   }
 
   checkLetterVsDino() {
-    console.log(this.dinoArray);
     this.dinoArray.forEach((char, index) => {
       if (this.letterArray.includes(char)) {
         this.resultsArray[index] = char;
@@ -25,7 +25,7 @@ export default class DinoGameObject {
     }
   }
 
-  noMatch() {
+  updateAttemptsUsed() {
     if (this.wordTrue == false) {
       this.failedAttempts += 1;
       if (this.failedAttempts === 10) {
@@ -34,13 +34,13 @@ export default class DinoGameObject {
     }
   }
 
-  checkForUniqueLetters() {
-    this.dinoArray.forEach(char => {
-      
-    });
+  isPreviousGuess() {
+    let letterString = this.letterArray.toString();
+    if (this.previousAttempts.includes(letterString)) {
+      return true;
+    } else {
+      this.previousAttempts.push(letterString);
+      return false;
+    }
   }
 }
-
-// win condition options:
-// 1. Recombine array and compare string.
-// 2. 

@@ -31,18 +31,29 @@ window.addEventListener("load", function () {
       letterDiv.removeAttribute("class", "hidden");
       document.querySelector("form#letterInput").addEventListener("submit", function (e) {
         e.preventDefault();
-        dinoGameObject.letterArray = [getLetter()];
-        dinoGameObject.checkLetterVsDino();
-        document.querySelector("p#showResponse").innerText = dinoGameObject.resultsArray;
-        dinoGameObject.noMatch();
-        if (dinoGameObject.gameLoss === true) {
-          document.querySelector("p#showResponse").innerText = "Game Over";
-          let resetDiv = document.querySelector("div#resetButton");
-          resetDiv.removeAttribute("class", "hidden");
-          // document.querySelector("reset#clear").addEventListener("submit", )
-        } else if (dinoGameObject.gameWin === true) {
-          
+        let letter = getLetter();
+        if (/[^a-zA-Z\s]/g.test(letter) || letter === "") {
+          document.querySelector("#showResponse").innerText = "Not a valid letter";
+        } else {
+          dinoGameObject.letterArray = [letter];
+          if (dinoGameObject.isPreviousGuess() === false) {
+            dinoGameObject.checkLetterVsDino();
+            document.querySelector("p#showResponse").innerText = dinoGameObject.resultsArray;
+            document.querySelector("p#previousAttempts").innerText = dinoGameObject.previousAttempts;
+            dinoGameObject.updateAttemptsUsed();
+            if (dinoGameObject.gameLoss === true) {
+              document.querySelector("p#showResponse").innerText = "Game Over";
+              let resetDiv = document.querySelector("div#resetButton");
+              resetDiv.removeAttribute("class", "hidden");
+              document.querySelector("#clear").addEventListener("click", function() {
+                window.location.reload();
+              });
+            }
+          } else {
+            document.querySelector("p#previousAttempts").innerText = "You have already guessed that letter, enter new guess.";
+          }
         }
+        document.querySelector("input#letter").value = "";
       });
     });
   });
